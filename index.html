@@ -46,54 +46,30 @@
 <body>
 
   <h1>Открыть во внешнем браузере</h1>
-  <button class="big-button" onclick="handleShare()">Открыть через системное меню</button>
+  <button class="big-button" onclick="handleShare()">Открыть через браузер</button>
 
-  <div class="instruction" id="instruction"></div>
+  <div class="instruction">
+    📱 <b>Инструкция для iPhone:</b><br>
+    Нажмите кнопку выше, выберите <b>«Chrome» или «Safari»</b>, затем нажмите <b>«Открыть»</b>.<br><br>
+    📱 <b>Инструкция для Android:</b><br>
+    Если автоматически не открылось, нажмите кнопку выше, затем выберите <b>«Chrome»</b> или любой другой браузер для открытия Instagram.
+  </div>
 
   <script>
-    const shareUrl = "https://www.google.com"; // ← замени на нужную ссылку
-
-    const ua = navigator.userAgent || "";
-    const isInstagram = ua.includes("Instagram");
-    const isFacebook = ua.includes("FBAV");
-    const isAndroid = /Android/i.test(ua);
-    const isIOS = /iPhone|iPad|iPod/i.test(ua);
-
-    // Показ инструкции в зависимости от устройства
-    const instructionEl = document.getElementById("instruction");
-    if (isIOS) {
-      instructionEl.innerHTML = `
-        📱 <b>Инструкция для iPhone:</b><br>
-        Нажмите «<b>Отправить сообщение</b>», затем выберите <b>«Открыть в Safari»</b>.
-      `;
-    } else if (isAndroid) {
-      instructionEl.innerHTML = `
-        🤖 <b>Инструкция для Android:</b><br>
-        Прокрутите меню вправо, нажмите <b>«Ещё»</b> и выберите браузер <b>Chrome</b> или другой.
-      `;
-    } else {
-      instructionEl.innerHTML = `
-        💻 Откройте эту ссылку во внешнем браузере, если она не сработала автоматически.
-      `;
-    }
-
-    // Автовыброс из WebView Instagram/Facebook на Android
-    if ((isInstagram || isFacebook) && isAndroid) {
-      setTimeout(() => {
-        window.location.href = "intent://instagram.com#Intent;package=com.instagram.android;scheme=https;end;";
-      }, 1000);
-    }
+    const shareUrl = "https://instagram.com";
 
     function handleShare() {
-      if (navigator.share) {
-        navigator.share({
-          title: 'Перейти на сайт',
-          text: 'Открой эту ссылку во внешнем браузере:',
-          url: shareUrl
-        }).catch(err => console.log("Share canceled", err));
-      } else {
-        window.location.href = shareUrl;
-      }
+      window.location.href = shareUrl;
+    }
+
+    const ua = navigator.userAgent;
+    const isInstagram = ua.includes("Instagram") || ua.includes("FBAV");
+    const isAndroid = /Android/i.test(ua);
+
+    if (isInstagram && isAndroid) {
+      setTimeout(() => {
+        window.location.href = "intent://instagram.com#Intent;package=com.instagram.android;scheme=https;end;";
+      }, 500);
     }
   </script>
 
