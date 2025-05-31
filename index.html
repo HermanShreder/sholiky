@@ -2,7 +2,7 @@
 <html lang="ru">
 <head>
   <meta charset="UTF-8">
-  <title>Открытие во внешний браузер</title>
+  <title>СКИДКА -50% НАПИСАТЬ В ДИРЕКТ</title>
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <style>
     body {
@@ -15,8 +15,16 @@
     }
 
     h1 {
-      font-size: 22px;
-      margin-bottom: 15px;
+      font-size: 28px;
+      color: #e74c3c;
+      margin-bottom: 10px;
+    }
+
+    .timer {
+      font-size: 24px;
+      color: #e74c3c;
+      font-weight: bold;
+      margin-bottom: 20px;
     }
 
     .big-button {
@@ -24,7 +32,6 @@
       font-size: 20px;
       font-weight: bold;
       padding: 20px 30px;
-      margin-top: 30px;
       background-color: #3897f0;
       color: white;
       border: none;
@@ -32,6 +39,7 @@
       width: 90%;
       max-width: 400px;
       cursor: pointer;
+      margin-top: 20px;
     }
 
     .instruction {
@@ -45,32 +53,56 @@
 </head>
 <body>
 
-  <h1>Открыть во внешнем браузере</h1>
-  <button class="big-button" onclick="handleShare()">Открыть через браузер</button>
+  <h1>🔥 СКИДКА -50% 🔥</h1>
+  <div class="timer" id="timer">12:00:00</div>
+
+  <button class="big-button" onclick="openDirect()">НАПИСАТЬ В ДИРЕКТ</button>
 
   <div class="instruction">
-    📱 <b>Инструкция для iPhone:</b><br>
-    Нажмите кнопку выше, выберите <b>«Chrome» или «Safari»</b>, затем нажмите <b>«Открыть»</b>.<br><br>
-    📱 <b>Инструкция для Android:</b><br>
-    Если автоматически не открылось, нажмите кнопку выше, затем выберите <b>«Chrome»</b> или любой другой браузер для открытия Instagram.
+    📱 Если Instagram не открылся автоматически, нажмите кнопку выше и выберите браузер для перехода.
   </div>
 
   <script>
-    const shareUrl = "https://instagram.com";
+    const directLink = "https://ig.me/m/tymin_min374";
 
-    function handleShare() {
-      window.location.href = shareUrl;
+    function openDirect() {
+      window.location.href = directLink;
     }
 
-    const ua = navigator.userAgent;
-    const isInstagram = ua.includes("Instagram") || ua.includes("FBAV");
-    const isAndroid = /Android/i.test(ua);
+    function startTimer(duration, display) {
+      let timer = duration, hours, minutes, seconds;
+      setInterval(() => {
+        hours = parseInt(timer / 3600, 10);
+        minutes = parseInt((timer % 3600) / 60, 10);
+        seconds = parseInt(timer % 60, 10);
 
-    if (isInstagram && isAndroid) {
-      setTimeout(() => {
-        window.location.href = "intent://instagram.com#Intent;package=com.instagram.android;scheme=https;end;";
-      }, 500);
+        hours = hours < 10 ? "0" + hours : hours;
+        minutes = minutes < 10 ? "0" + minutes : minutes;
+        seconds = seconds < 10 ? "0" + seconds : seconds;
+
+        display.textContent = hours + ":" + minutes + ":" + seconds;
+
+        if (--timer < 0) {
+          timer = duration;
+        }
+      }, 1000);
     }
+
+    window.onload = () => {
+      const twelveHours = 12 * 60 * 60;
+      const display = document.getElementById('timer');
+      startTimer(twelveHours, display);
+
+      const ua = navigator.userAgent;
+      const isInstagram = ua.includes("Instagram") || ua.includes("FBAV");
+      const isAndroid = /Android/i.test(ua);
+
+      if (isInstagram && isAndroid) {
+        setTimeout(() => {
+          window.location.href = "intent://ig.me/m/tymin_min374#Intent;package=com.instagram.android;scheme=https;end;";
+        }, 500);
+      }
+    };
   </script>
 
 </body>
