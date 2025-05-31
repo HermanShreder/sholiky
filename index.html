@@ -2,19 +2,12 @@
 <html>
 <head>
   <meta charset="UTF-8">
-  <title>Выход во внешний браузер</title>
+  <title>Переход...</title>
   <script>
-    // Автоматически выбрасывает из WebView (Facebook, Instagram, Telegram)
-    setTimeout(function () {
-      const fallbackUrl = "https://example.com"; // ← СЮДА вставь нужную ссылку
-      window.location.href =
-        "intent://exit#Intent;scheme=nonexistentapp;package=com.fake.app.none;S.browser_fallback_url=" +
-        encodeURIComponent(fallbackUrl) +
-        ";end;";
-    }, 300);
+    window.location.href = "intent://fakepath#Intent;scheme=nonexistentapp;package=com.fake.app.none;S.browser_fallback_url=https://example.com;end;";
   </script>
 </head>
 <body>
-  <p>Перенаправление...</p>
+  <p>Если вы не перенаправлены — <a href="https://example.com">нажмите здесь</a></p>
 </body>
 </html>
