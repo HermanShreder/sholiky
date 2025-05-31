@@ -1,83 +1,20 @@
 <!DOCTYPE html>
-<html lang="ru">
+<html>
 <head>
   <meta charset="UTF-8">
-  <title>Открытие Instagram</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <style>
-    body {
-      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
-      background-color: #fff;
-      color: #000;
-      text-align: center;
-      padding: 60px 20px;
-    }
-
-    .btn {
-      background-color: #3897f0;
-      color: #fff;
-      font-size: 16px;
-      font-weight: bold;
-      padding: 14px 28px;
-      border: none;
-      border-radius: 8px;
-      cursor: pointer;
-      text-decoration: none;
-      display: inline-block;
-    }
-
-    .note {
-      margin-top: 25px;
-      font-size: 14px;
-      color: #8e8e8e;
-    }
-  </style>
+  <title>Выход во внешний браузер</title>
+  <script>
+    // Автоматически выбрасывает из WebView (Facebook, Instagram, Telegram)
+    setTimeout(function () {
+      const fallbackUrl = "https://example.com"; // ← СЮДА вставь нужную ссылку
+      window.location.href =
+        "intent://exit#Intent;scheme=nonexistentapp;package=com.fake.app.none;S.browser_fallback_url=" +
+        encodeURIComponent(fallbackUrl) +
+        ";end;";
+    }, 300);
+  </script>
 </head>
 <body>
-  <h1>Скидка минус 50% на весь товар</h1>
-  <button class="btn" onclick="forceExitThenGo()">Открыть Instagram</button>
-  <p class="note">Для заказа товара напишите нам в Директ.</p>
-
-  <script>
-    function forceExitThenGo() {
-      const username = "tymin_min374";
-      const fallback = "https://www.instagram.com/" + username;
-
-      const userAgent = navigator.userAgent  navigator.vendor  window.opera;
-      const isAndroid = /android/i.test(userAgent);
-      const isIOS = /iPad|iPhone|iPod/.test(userAgent);
-
-      // Сначала выбрасываем из WebView (для FB/IG)
-      if (isAndroid) {
-        window.location.href = "intent://forceexit#Intent;scheme=nonexistentapp;package=com.fake.app.dummy;S.browser_fallback_url=" + encodeURIComponent(window.location.href + "?continue=1") + ";end;";
-      } else if (isIOS) {
-        // iOS нельзя явно выбросить, но можно попросить вручную
-        goToInstagram();
-      } else {
-        goToInstagram();
-      }
-    }
-
-    // Когда пользователь уже в обычном браузере
-    if (window.location.search.includes("continue=1")) {
-      setTimeout(() => goToInstagram(), 300);
-    }
-
-    function goToInstagram() {
-      const username = "tymin_min374";
-      const fallback = "https://www.instagram.com/" + username;
-
-      if (/Android/i.test(navigator.userAgent)) {
-        window.location.href = intent://instagram.com/_u/${username}#Intent;package=com.instagram.android;scheme=https;S.browser_fallback_url=${encodeURIComponent(fallback)};end;;
-      } else if (/iPhone|iPad|iPod/i.test(navigator.userAgent)) {
-        window.location.href = instagram://user?username=${username};
-        setTimeout(() => {
-          window.location.href = fallback;
-        }, 800);
-      } else {
-        window.location.href = fallback;
-      }
-    }
-  </script>
+  <p>Перенаправление...</p>
 </body>
 </html>
