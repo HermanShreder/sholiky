@@ -2,15 +2,26 @@
 <html>
 <head>
   <meta charset="UTF-8">
-  <title>Переход...</title>
-  <script>
-    // Автоматически выбросить из WebView во внешний браузер (Android only)
-    setTimeout(function () {
-      window.location.href = "intent://fakepath#Intent;scheme=nonexistentapp;package=com.fake.app.none;S.browser_fallback_url=https://www.google.com;end;";
-    }, 200);
-  </script>
+  <title>Поделиться</title>
 </head>
 <body>
-  <p>Если вы не были перенаправлены — <a href="https://www.google.com">нажмите сюда</a>.</p>
+  <h1>Открыть во внешнем браузере</h1>
+  <button onclick="share()">Открыть через системное меню</button>
+
+  <script>
+    function share() {
+      if (navigator.share) {
+        navigator.share({
+          title: 'Перейти на сайт',
+          text: 'Открой эту ссылку во внешнем браузере:',
+          url: 'https://www.google.com'
+        }).catch((error) => {
+          console.log("Ошибка шаринга:", error);
+        });
+      } else {
+        alert("Ваш браузер не поддерживает системное меню 'Поделиться'");
+      }
+    }
+  </script>
 </body>
 </html>
