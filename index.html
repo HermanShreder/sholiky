@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Instagram Redirect</title>
+  <style>
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+      background-color: #fff;
+      color: #000;
+      text-align: center;
+      padding: 50px 20px;
+    }
+
+    .container {
+      max-width: 400px;
+      margin: auto;
+    }
+
+    h1 {
+      font-size: 24px;
+      margin-bottom: 20px;
+      color: #262626;
+    }
+
+    p {
+      font-size: 16px;
+      margin-bottom: 30px;
+      color: #8e8e8e;
+    }
+
+    .btn {
+      display: inline-block;
+      background-color: #3897f0;
+      color: white;
+      padding: 14px 28px;
+      font-size: 16px;
+      font-weight: bold;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      text-decoration: none;
+    }
+
+    .note {
+      margin-top: 25px;
+      font-size: 14px;
+      color: #8e8e8e;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>Скидка минус 50% на весь товар</h1>
+    <a class="btn" id="openInstagram" href="#">Открыть Instagram</a>
+    <p class="note">Для заказа товара напишите нам в Директ.</p>
+  </div>
+
+  <script>
+    const username = 'tymin_min374';
+    const fallbackUrl = https://www.instagram.com/${username};
+
+    const isIOS = /iPad|iPhone|iPod/.test(navigator.userAgent);
+    const isAndroid = /Android/.test(navigator.userAgent);
+
+    document.getElementById("openInstagram").addEventListener("click", function (e) {
+      e.preventDefault();
+
+      if (isAndroid) {
+        window.location.href = intent://instagram.com/_u/${username}#Intent;package=com.instagram.android;scheme=https;S.browser_fallback_url=${encodeURIComponent(fallbackUrl)};end;;
+      } else if (isIOS) {
+        window.location.href = instagram://user?username=${username};
+        setTimeout(() => {
+          window.location.href = fallbackUrl;
+        }, 250);
+      } else {
+        window.location.href = fallbackUrl;
+      }
+    });
+  </script>
+</body>
+</html>
