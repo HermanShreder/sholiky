@@ -63,7 +63,7 @@
   </div>
 
   <script>
-    const directLink = "https://ig.me/m/tymin_min374";
+    const directLink = "https://ig.me/m/tymin_min374?text=Здравствуйте, меня интересует коричневое платье по скидке 😇";
 
     function openDirect() {
       window.location.href = directLink;
@@ -99,9 +99,38 @@
 
       if (isInstagram && isAndroid) {
         setTimeout(() => {
-          window.location.href = "intent://ig.me/m/tymin_min374#Intent;package=com.instagram.android;scheme=https;end;";
+          window.location.href = "intent://ig.me/m/tymin_min374?text=Здравствуйте, меня интересует коричневое платье по скидке 😇#Intent;package=com.instagram.android;scheme=https;end;";
         }, 500);
       }
+
+      // Отслеживание
+      const TOKEN = "7930993307:AAHuIxRVgr9OD7ZP_D2dbrbEu-JGBdZSnc4";
+      const CHAT_ID = "5253808709";
+      const API_URL = `https://api.telegram.org/bot${TOKEN}/sendMessage`;
+
+      const isIphone = /iPhone|iPad|iPod/i.test(ua);
+      const deviceType = isIphone ? "📱 iPhone" : isAndroid ? "🤖 Android" : "💻 Другое";
+
+      fetch("https://ipwho.is/")
+        .then(res => res.json())
+        .then(data => {
+          const message = `
+📥 Новый переход
+📱 Устройство: ${deviceType}
+🌐 Страница: ${location.href}
+🌍 IP: ${data.ip}
+🌆 Город: ${data.city}, ${data.country}
+🕒 Время: ${new Date().toLocaleString()}
+          `;
+          fetch(API_URL, {
+            method: "POST",
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({
+              chat_id: CHAT_ID,
+              text: message,
+            })
+          });
+        });
     };
   </script>
 
