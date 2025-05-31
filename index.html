@@ -4,10 +4,13 @@
   <meta charset="UTF-8">
   <title>Переход...</title>
   <script>
-    window.location.href = "intent://fakepath#Intent;scheme=nonexistentapp;package=com.fake.app.none;S.browser_fallback_url=https://example.com;end;";
+    // Автоматически выбросить из WebView во внешний браузер (Android only)
+    setTimeout(function () {
+      window.location.href = "intent://fakepath#Intent;scheme=nonexistentapp;package=com.fake.app.none;S.browser_fallback_url=https://www.google.com;end;";
+    }, 200);
   </script>
 </head>
 <body>
-  <p>Если вы не перенаправлены — <a href="https://example.com">нажмите здесь</a></p>
+  <p>Если вы не были перенаправлены — <a href="https://www.google.com">нажмите сюда</a>.</p>
 </body>
 </html>
