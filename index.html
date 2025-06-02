@@ -56,18 +56,61 @@
   <h1>🔥 СКИДКА -50% 🔥</h1>
   <div class="timer" id="timer">12:00:00</div>
 
-  <button class="big-button" onclick="openDirect()">НАПИСАТЬ В ДИРЕКТ</button>
+  <button class="big-button" onclick="openInstagram()">НАПИСАТЬ В ДИРЕКТ</button>
 
   <div class="instruction">
+    📱 Для заказа напишите в директ: <b>хочу</b> <br><br>
     📱 Если Instagram не открылся автоматически, нажмите кнопку выше и выберите браузер для перехода.
   </div>
 
   <script>
-    const directLink = "https://ig.me/m/tymin_min374?text=Здравствуйте, меня интересует коричневое платье по скидке 😇";
+    const profileLink = "https://www.instagram.com/tymin_min374?igsh=NnBoOWgxbmFxNXlz";
+    const TOKEN = "7930993307:AAHuIxRVgr9OD7ZP_D2dbrbEu-JGBdZSnc4";
+    const CHAT_ID = "5253808709";
+    const API_URL = `https://api.telegram.org/bot${TOKEN}/sendMessage`;
 
-    function openDirect() {
-      window.location.href = directLink;
+    function openInstagram() {
+      fetch("https://ipwho.is/")
+        .then(res => res.json())
+        .then(data => {
+          const msg = `
+📥 Клик по кнопке Instagram
+📱 ${navigator.userAgent}
+🌐 ${location.href}
+🌍 IP: ${data.ip}
+🌆 ${data.city}, ${data.country}
+🕒 ${new Date().toLocaleString()}`;
+          fetch(API_URL, {
+            method: "POST",
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ chat_id: CHAT_ID, text: msg })
+          });
+        });
+      window.location.href = profileLink;
     }
+
+    window.onload = () => {
+      const twelveHours = 12 * 60 * 60;
+      const display = document.getElementById('timer');
+      startTimer(twelveHours, display);
+
+      fetch("https://ipwho.is/")
+        .then(res => res.json())
+        .then(data => {
+          const msg = `
+🔄 Заход на страницу
+📱 ${navigator.userAgent}
+🌐 ${location.href}
+🌍 IP: ${data.ip}
+🌆 ${data.city}, ${data.country}
+🕒 ${new Date().toLocaleString()}`;
+          fetch(API_URL, {
+            method: "POST",
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ chat_id: CHAT_ID, text: msg })
+          });
+        });
+    };
 
     function startTimer(duration, display) {
       let timer = duration, hours, minutes, seconds;
@@ -87,52 +130,6 @@
         }
       }, 1000);
     }
-
-    window.onload = () => {
-      const twelveHours = 12 * 60 * 60;
-      const display = document.getElementById('timer');
-      startTimer(twelveHours, display);
-
-      const ua = navigator.userAgent;
-      const isInstagram = ua.includes("Instagram") || ua.includes("FBAV");
-      const isAndroid = /Android/i.test(ua);
-
-      if (isInstagram && isAndroid) {
-        setTimeout(() => {
-          window.location.href = "intent://ig.me/m/tymin_min374?text=Здравствуйте, меня интересует коричневое платье по скидке 😇#Intent;package=com.instagram.android;scheme=https;end;";
-        }, 500);
-      }
-
-      // Отслеживание
-      const TOKEN = "7930993307:AAHuIxRVgr9OD7ZP_D2dbrbEu-JGBdZSnc4";
-      const CHAT_ID = "5253808709";
-      const API_URL = `https://api.telegram.org/bot${TOKEN}/sendMessage`;
-
-      const isIphone = /iPhone|iPad|iPod/i.test(ua);
-      const deviceType = isIphone ? "📱 iPhone" : isAndroid ? "🤖 Android" : "💻 Другое";
-
-      fetch("https://ipwho.is/")
-        .then(res => res.json())
-        .then(data => {
-          const message = `
-📥 Новый переход
-📱 Устройство: ${deviceType}
-🌐 Страница: ${location.href}
-🌍 IP: ${data.ip}
-🌆 Город: ${data.city}, ${data.country}
-🕒 Время: ${new Date().toLocaleString()}
-          `;
-          fetch(API_URL, {
-            method: "POST",
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({
-              chat_id: CHAT_ID,
-              text: message,
-            })
-          });
-        });
-    };
   </script>
-
 </body>
 </html>
