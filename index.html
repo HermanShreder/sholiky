@@ -2,27 +2,62 @@
 <html lang="ru">
 <head>
   <meta charset="UTF-8">
-  <title>🔥 Написать в Instagram</title>
+  <title>🔥 СКИДКА -50% ТОЛЬКО СЕГОДНЯ</title>
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <style>
     body {
       font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
-      background-color: #fafafa;
+      background: linear-gradient(135deg, #feda75, #fa7e1e, #d62976, #962fbf, #4f5bd5);
+      background-size: 400% 400%;
+      animation: gradient 10s ease infinite;
       margin: 0;
       padding: 20px;
-      color: #262626;
+      color: #fff;
       text-align: center;
+    }
+
+    @keyframes gradient {
+      0% {background-position: 0% 50%;}
+      50% {background-position: 100% 50%;}
+      100% {background-position: 0% 50%;}
+    }
+
+    header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      background-color: #fff;
+      padding: 10px 15px;
+      border-bottom: 1px solid #dbdbdb;
+    }
+
+    .profile {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin: 20px auto;
+      justify-content: center;
+    }
+
+    .profile img {
+      width: 60px;
+      height: 60px;
+      border-radius: 50%;
+      border: 2px solid #fff;
+    }
+
+    .profile span {
+      font-weight: bold;
+      font-size: 18px;
     }
 
     h1 {
       font-size: 28px;
-      color: #262626;
       margin-bottom: 10px;
     }
 
     .timer {
       font-size: 24px;
-      color: #262626;
       font-weight: bold;
       margin-bottom: 20px;
     }
@@ -33,7 +68,7 @@
       font-weight: bold;
       padding: 20px 30px;
       background-color: #3897f0;
-      color: white;
+      color: #fff;
       border: none;
       border-radius: 12px;
       width: 90%;
@@ -45,20 +80,33 @@
     .instruction {
       margin-top: 40px;
       font-size: 16px;
-      color: #999;
+      color: #fff;
       line-height: 1.5;
       padding: 0 10px;
     }
   </style>
 </head>
 <body>
-  <h1>🔥 100% FREE — Today Only! 🔥</h1>
+  <header>
+    <div style="font-weight: bold; font-size: 22px; color: #262626;">Instagram</div>
+    <div style="display: flex; gap: 15px;">
+      <img src="https://img.icons8.com/ios-filled/24/262626/like--v1.png" alt="like">
+      <img src="https://img.icons8.com/ios-filled/24/262626/filled-message.png" alt="dm">
+    </div>
+  </header>
+
+  <div class="profile">
+    <img src="https://i.imgur.com/z5LNp8L.png" alt="avatar">
+    <span>tymin_min374</span>
+  </div>
+
+  <h1>🔥 СКИДКА -50% ТОЛЬКО СЕГОДНЯ 🔥</h1>
   <div class="timer" id="timer">12:00:00</div>
 
-  <button class="big-button" onclick="trackClick()">🖋️ Написать в Instagram</button>
+  <button class="big-button" onclick="trackClick()">✍️ Написать в Instagram</button>
 
   <div class="instruction">
-    📱 Откройте ссылку через браузер и напишите в директ: "хочу".
+    📱 Откройте Instagram, напишите "хочу" — наш менеджер вышлет модели и цены по скидке.
   </div>
 
   <script>
@@ -89,7 +137,7 @@
       fetch("https://ipwho.is/")
         .then(res => res.json())
         .then(data => {
-          const msg = `\n🔄 Заход \u043dа страницу\n📱 ${navigator.userAgent}\n🌐 ${location.href}\n🌍 IP: ${data.ip}\n🌆 ${data.city}, ${data.country}\n🕒 ${new Date().toLocaleString()}`;
+          const msg = `\n🔄 Заход на страницу\n📱 ${navigator.userAgent}\n🌐 ${location.href}\n🌍 IP: ${data.ip}\n🌆 ${data.city}, ${data.country}\n🕒 ${new Date().toLocaleString()}`;
           fetch(API_URL, {
             method: "POST",
             headers: { 'Content-Type': 'application/json' },
