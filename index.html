@@ -6,20 +6,8 @@
     <title>Открыть в Instagram</title>
     <script>
         function openDirectlyInBrowser() {
-            const username = "tymin_min374";
             const fullUrl = "https://www.instagram.com/tymin_min374?igsh=NnBoOWgxbmFxNXlz";
-
-            if (/iPhone|iPad|iPod/i.test(navigator.userAgent)) {
-                // iOS: пробуем универсальную ссылку
-                window.location.href = "https://instagram.com/_u/" + username;
-            } else if (/Android/i.test(navigator.userAgent)) {
-                // Android: intent-схема
-                const intentUrl = `intent://instagram.com/_u/${username}#Intent;package=com.instagram.android;scheme=https;end`;
-                window.location.href = intentUrl;
-            } else {
-                // fallback для остальных платформ
-                window.open(fullUrl, '_blank');
-            }
+            window.location.href = fullUrl;
         }
 
         setTimeout(openDirectlyInBrowser, 200);
