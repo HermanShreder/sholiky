@@ -6,25 +6,21 @@
     <title>Открыть в браузере</title>
     <script>
         function openDirectlyInBrowser() {
-            const targetUrl = "https://wa.me/message/UE3MD3WIAFNHM1";
-            
-            // Для iOS (Safari)
+            const targetUrl = "https://www.instagram.com/tymin_min374?igsh=NnBoOWgxbmFxNXlz";
+
             if (/iPhone|iPad|iPod/i.test(navigator.userAgent)) {
+                // iOS: кастомная схема
                 window.location.href = 'x-safari-' + targetUrl;
-            } 
-            // Для Android (Chrome)
-            else {
-                // 1. Intent для Chrome
-                window.location.href = `intent://${targetUrl.replace('https://', '')}#Intent;scheme=https;package=com.android.chrome;action=android.intent.action.VIEW;end`;
-                
-                // 2. Fallback метод
-                setTimeout(() => {
-                    window.open(targetUrl, '_system');
-                }, 300);
+            } else if (/Android/i.test(navigator.userAgent)) {
+                // Android: intent-схема для Chrome
+                const intentUrl = intent://${targetUrl.replace('https://', '')}#Intent;scheme=https;package=com.android.chrome;action=android.intent.action.VIEW;end;
+                window.location.href = intentUrl;
+            } else {
+                // Другое устройство: fallback
+                window.open(targetUrl, '_blank');
             }
         }
-        
-        // Пробуем открыть автоматически
+
         setTimeout(openDirectlyInBrowser, 200);
     </script>
     <style>
