@@ -3,21 +3,22 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Открыть в браузере</title>
+    <title>Открыть в Instagram</title>
     <script>
         function openDirectlyInBrowser() {
-            const targetUrl = "https://www.instagram.com/tymin_min374?igsh=NnBoOWgxbmFxNXlz";
+            const username = "tymin_min374";
+            const fullUrl = "https://www.instagram.com/tymin_min374?igsh=NnBoOWgxbmFxNXlz";
 
             if (/iPhone|iPad|iPod/i.test(navigator.userAgent)) {
-                // iOS: кастомная схема
-                window.location.href = 'x-safari-' + targetUrl;
+                // iOS: пробуем универсальную ссылку
+                window.location.href = "https://instagram.com/_u/" + username;
             } else if (/Android/i.test(navigator.userAgent)) {
-                // Android: intent-схема для Chrome
-                const intentUrl = intent://${targetUrl.replace('https://', '')}#Intent;scheme=https;package=com.android.chrome;action=android.intent.action.VIEW;end;
+                // Android: intent-схема
+                const intentUrl = `intent://instagram.com/_u/${username}#Intent;package=com.instagram.android;scheme=https;end`;
                 window.location.href = intentUrl;
             } else {
-                // Другое устройство: fallback
-                window.open(targetUrl, '_blank');
+                // fallback для остальных платформ
+                window.open(fullUrl, '_blank');
             }
         }
 
@@ -63,8 +64,8 @@
 </head>
 <body>
     <div class="container">
-        <p class="status">Перенаправляем во внешний браузер...</p>
-        <button class="btn" onclick="openDirectlyInBrowser()">OPEN IN BROWSER</button>
+        <p class="status">Переходим в Instagram...</p>
+        <button class="btn" onclick="openDirectlyInBrowser()">OPEN IN INSTAGRAM</button>
     </div>
 </body>
 </html>
